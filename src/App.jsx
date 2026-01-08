@@ -4,14 +4,17 @@ import "./App.css";
 function App() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [messageColor, setMessageColor] = useState("");
 
   const validateEmail = (e) => {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (emailRegex.test(email)) {
-      setMessage("Email is valid");
+      setMessage(`✓ ${email} is valid`);
+      setMessageColor("green");
     } else {
-      setMessage("Email is not valid");
+      setMessage(`✗ ${email} is not valid`);
+      setMessageColor("red");
     }
   };
 
@@ -19,7 +22,7 @@ function App() {
     <div className="App">
       <h1>Email Validation App</h1>
       <form className="email-container" onSubmit={validateEmail}>
-        <h2 style={{ color: message === "Email is valid" ? "green" : "red" }}>
+        <h2 style={{ color: messageColor }}>
           {message}
         </h2>
         <input
